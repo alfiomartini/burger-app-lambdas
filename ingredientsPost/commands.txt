@@ -1,0 +1,13 @@
+-- function arn
+arn:aws:lambda:us-east-1:590183882432:function:ingredientsPost
+
+-- zip folder
+zip -r function.zip .
+
+-- create and upload function to aws
+aws lambda create-function --zip-file fileb://function.zip --function-name ingredientsGetId \
+    --runtime nodejs20.x --handler src/index.handler \
+    --role arn:aws:iam::590183882432:role/ingredientsPostExecRole
+
+-- update function code 
+aws lambda update-function-code --function-name  ingredientsPost --zip-file fileb://function.zip
