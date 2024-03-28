@@ -1,14 +1,9 @@
 import { connection } from "./client.mjs";
 
-export const handler = async () => {
+export const handler = async (event) => {
   let response = {};
   try {
-    const body = {
-      name: "test",
-      quantity: "250",
-      description: "grams",
-    };
-    const { name, quantity, description } = body;
+    const { name, quantity, description } = JSON.parse(event["body"]);
     const [result] = await connection.query(
       `insert into ingredient (name, quantity, description)
        values(?,?,?)`,
