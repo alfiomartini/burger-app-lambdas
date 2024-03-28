@@ -1,14 +1,10 @@
 import { connection } from "./client.mjs";
 
-export const handler = async () => {
+export const handler = async (event) => {
   let response = {};
-  const body = {
-    name: "test",
-    quantity: 350,
-    description: "ml",
-  };
+  const body = JSON.parse(event["body"]);
   try {
-    const id = 200;
+    const id = event["path"].split("/")[2];
     const { name, quantity, description } = body;
     await connection.query(
       `update ingredient 
