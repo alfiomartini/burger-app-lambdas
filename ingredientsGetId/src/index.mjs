@@ -1,9 +1,9 @@
 import { connection } from "./client.mjs";
 
-export const handler = async () => {
+export const handler = async (event) => {
   let response = {};
   try {
-    const id = 5;
+    const id = event["path"].split("/")[2];
     const [results] = await connection.query(
       "select * from ingredient where ing_id = ?",
       [id]
