@@ -1,9 +1,9 @@
 import { connection } from "./client.mjs";
 
-export const handler = async () => {
+export const handler = async (event) => {
   let response = {};
   try {
-    const id = 185;
+    const id = event["path"].split("/")[2];
     await connection.query("delete from ingredient where ing_id = ?", [id]);
     // test if results is not empty
     response = {
